@@ -1,0 +1,45 @@
+
+[
+                    {
+                    "query": "astronaut",
+                    "keywords": ["moon","space","astronaut suit"]
+                    },
+                    {
+                    "query": "animal",
+                    "keywords": ["elephant","tiger","lion","deer","mammals"]
+                    },
+                    {
+                    "query": "abstract",
+                    "priority": ["abstract art","abstract background","abstract dark"]
+                    },
+                    
+                    {
+                    "query": "Animal in the zoo",
+                    "keywords": ["elephant","tiger","lion","deer","mammals"]
+                    },
+                    {
+                         "query": "birthday",
+                         "keywords": ["happy birthday","birthday cake","cake","celebration"]
+                    },
+                    {
+                         "query":"books",
+                         "keywords":["romentice books","fiction books","self help books"]
+                    },
+                    {
+                         "query": "construction",
+                         "keywords": ["buildings construction"]
+                    },
+                    {
+                         "query": "cars",
+                         "keywords": ["audi", "bmw","racing cars"]
+                    },
+                    {
+                         "query": "fitness",
+                         "keywords": ["yoga", "excercise"]
+                    },
+                    {
+                         "query": "fitness",
+                         "keywords": ["yoga", "excercise"]
+                    }
+        
+]

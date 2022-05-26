@@ -3,15 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import {AppConfigProvider} from './context/appConfigContext';
+import { FetchImgProvider } from './context/fetchImgContext';
+import {SearchImgProvider} from './context/searchImgContext'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AppConfigProvider>
+    <FetchImgProvider>
+      <SearchImgProvider><App /></SearchImgProvider>
+    
+    </FetchImgProvider>
+     
+    </AppConfigProvider>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
 reportWebVitals();
