@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import styled from 'styled-components'
 import {ReactComponent as Logo} from '../assets/logo.svg';
 import {FiSearch} from 'react-icons/fi'
@@ -10,7 +10,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import DarkModeSwitch from './DarkModeSwitch';
 import { useMediaQuery } from 'react-responsive'
 import {useAppConfigContext} from '../context/appConfigContext';
+import { findAllByTestId } from '@testing-library/react';
+
 const NavBar = () => {
+  const [openSearch,setOpenSearch] = useState(false)
   const{openSidebar,changeTheme} = useAppConfigContext()
   const isDesktopOrLaptop = useMediaQuery({
     query: '(min-width: 1200px)'
@@ -23,9 +26,12 @@ const NavBar = () => {
         <Logo/>
       </Link>
       <div className='links'>
-        <FiSearch className='search'/>
+        <FiSearch className='search' onClick={()=>setOpenSearch(!openSearch)}/>
         <GiHamburgerMenu className='menu' onClick={openSidebar}/>
       </div>
+     {openSearch &&  <div className='search-section' >
+      <Search place='nav' placeHolder='Search Images here'/>
+      </div>}
     </Wrapper>)
   }
   const NavLargeDevice = () =>{
@@ -34,7 +40,7 @@ const NavBar = () => {
       <Link to='/' className='logo'>
         <Logo/>
       </Link>
-
+  
       <div className='main-nav'>
 
         
@@ -88,6 +94,15 @@ const Wrapper = styled.nav`
   padding: 1rem 0;
   box-shadow: 0 2px 2px -2px #000000;
   width:100%;
+  .search-section{
+    position:absolute;
+    width:90%;
+    padding:1rem;
+    top:18%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background:#fff;
+  }
  .logo,.links{
    margin: 0 1rem ;
  }
