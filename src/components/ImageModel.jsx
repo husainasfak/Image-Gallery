@@ -7,18 +7,24 @@ import {FiTwitter} from 'react-icons/fi';
 import {Link} from 'react-router-dom'
 import {GoLocation} from 'react-icons/go'
 import styled from 'styled-components'
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 800,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  borderRadius:3
-};
+import { useMediaQuery } from 'react-responsive'
+
 
 function ImageModal({close,imgData}) {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(max-width: 1200px)'
+  })
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: isDesktopOrLaptop ? 300 : 800,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    borderRadius:3
+  };
+  
   const {urls, likes, user: {name,first_name,location,links:{html} ,social:{instagram_username,twitter_username},profile_image} , links} = imgData;
   return (
     <Wrapper>
@@ -26,7 +32,7 @@ function ImageModal({close,imgData}) {
               <div className='close-btn'>
                 <CgClose onClick={close}  fontSize={30}/>
               </div>    
-              <div className='img-details'>
+              <div className={`img-details ${isDesktopOrLaptop ? 'img-details-small' : ''}`}>
                   <img src={urls.small}/>
 
                   <div className='img-action-btn'>
@@ -51,7 +57,7 @@ function ImageModal({close,imgData}) {
                   </div>
                   </div>
               </div>  
-              <div className='main-img--description'>
+              <div className={`main-img--description ${isDesktopOrLaptop ? 'main-img--description-small':''}`}>
 
            <div className='description-profile'>
               <div  className='description-profile--img'>
@@ -122,6 +128,40 @@ const Wrapper  = styled.div`
     }
     }
   }
+  .img-details-small{
+    position:relative;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    img{
+      
+      height: 20rem;
+     
+    }
+    .img-action-btn{
+      .img-actions{
+        flex-direction:column;
+      }
+      button{
+        background:transparent;
+        padding: .4rem 1rem;
+        margin:.2rem;
+        font-size:.8rem;
+        border-radius:5px;
+        border:none;
+        outline:none;
+        background-color: #fbfbfb;
+        cursor: pointer;
+        h5{
+          margin:0 .3rem;
+        }
+      }
+      .img-action{
+        display: flex;
+        
+      }
+      
+    }
+    }
+  
   .close-btn{
     background-color: #fff;
     border-radius: 50%;
@@ -173,6 +213,14 @@ const Wrapper  = styled.div`
       }
     }
    
+  }
+  .main-img--description-small{
+    flex-direction: column;
+    .description-profile{
+       flex-direction: column;
+      align-items:center; 
+      text-align:center;
+    }
   }
 `
 
