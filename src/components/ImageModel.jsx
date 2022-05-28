@@ -37,7 +37,7 @@ function ImageModal({close,imgData}) {
   
   
 
-  const handleRe = async() =>{
+  const handleTagReq = async() =>{
     const findTags = []
     const imageInformation = await unsplash.get(`${links.self}`);
     setDownloads(imageInformation.data.downloads)
@@ -70,7 +70,7 @@ function ImageModal({close,imgData}) {
   }
 
   React.useEffect(()=>{
-    handleRe()
+    handleTagReq()
   },[])
 
 
