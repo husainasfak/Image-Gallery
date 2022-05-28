@@ -1,19 +1,20 @@
-import React,{useEffect} from 'react'
+import React from 'react'
 import styled from 'styled-components';
-import { Header,GalleryLayout } from '../components';
+import { Header,GalleryLayout, Loader } from '../components';
 import { useFetchImgContext } from '../context/fetchImgContext';
 import {useSearchImgContext} from '../context/searchImgContext';
 const Home = () => {
   const {images,isLoading} = useFetchImgContext();
-  const {searchQuery,searchedImages} = useSearchImgContext()
+  const {searchQuery,searchedImages,tags} = useSearchImgContext()
   return (
     <Wrapper>
       <Header/>
+      {isLoading && <Loader/>}
       {
-        searchQuery ==='' ? <GalleryLayout items={images}/> : <GalleryLayout items={searchedImages}/>
+        searchQuery ==='' ? <GalleryLayout items={images} searchTerm=''/> : <GalleryLayout items={searchedImages} searchTerm={searchQuery} tags={tags}/>
       }
       
-      {isLoading && 'Loading'}
+      
     </Wrapper>
   )
 }

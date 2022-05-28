@@ -4,28 +4,76 @@ import {CgClose} from 'react-icons/cg'
 import {AiOutlineShareAlt,AiOutlineInfoCircle,AiOutlineInstagram} from 'react-icons/ai'
 import {AiFillLike} from 'react-icons/ai';
 import {FiTwitter} from 'react-icons/fi';
-import {Link} from 'react-router-dom'
-import {GoLocation} from 'react-icons/go'
+// import {GoLocation} from 'react-icons/go'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
-
+import unsplash from '../api/unsplash';
+import {HiDownload} from 'react-icons/hi';
+import { useSearchImgContext } from "../context/searchImgContext";
 
 function ImageModal({close,imgData}) {
+  const {urls, likes, user: {name,first_name,links:{html} ,social:{instagram_username,twitter_username},profile_image} , links} = imgData;
+
+  const {updateSeachQuery} = useSearchImgContext();  
+
+  const [tags,setTags] = React.useState([]);
+
+  const [downloads,setDownloads] = React.useState(0);
+
   const isDesktopOrLaptop = useMediaQuery({
     query: '(max-width: 1200px)'
   })
+
   const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: isDesktopOrLaptop ? 300 : 800,
+    width: isDesktopOrLaptop ? 400 : 700,
     bgcolor: 'background.paper',
     boxShadow: 24,
     borderRadius:3
   };
   
-  const {urls, likes, user: {name,first_name,location,links:{html} ,social:{instagram_username,twitter_username},profile_image} , links} = imgData;
+  
+
+  const handleRe = async() =>{
+    const findTags = []
+    const imageInformation = await unsplash.get(`${links.self}`);
+    setDownloads(imageInformation.data.downloads)
+    imageInformation.data.related_collections.results.forEach(collectionTags => {
+      collectionTags.tags.map(tag=>{
+        findTags.push(tag.title)
+      })
+    }); 
+    setTags([...new Set(findTags)])
+    
+  }
+  
+  const handleDownload = () =>{
+    fetch(urls.regular).then(response=>response.blob()).then(
+      blob=>{
+        const blobURL = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = blobURL;
+        link.setAttribute('download',`${name}.jpeg`)
+        link.style = "display: none"; 
+        document.body.appendChild(link);
+        link.click()
+      }
+    )
+  }
+
+  const handleTagSearch = (tag) =>{
+      updateSeachQuery(tag)
+
+  }
+
+  React.useEffect(()=>{
+    handleRe()
+  },[])
+
+
   return (
     <Wrapper>
         <Box sx={style}>
@@ -33,7 +81,7 @@ function ImageModal({close,imgData}) {
                 <CgClose onClick={close}  fontSize={30}/>
               </div>    
               <div className={`img-details ${isDesktopOrLaptop ? 'img-details-small' : ''}`}>
-                  <img src={urls.small}/>
+                  <img src={urls.small} alt={name}/>
 
                   <div className='img-action-btn'>
                   <div className='img-actions'>
@@ -50,9 +98,10 @@ function ImageModal({close,imgData}) {
                         </a>
                     </div>
                     <div className='img-downlaod'>
-                      <a href={links.download} target="__blank">
+                      {/* <a download href={links.download} >
                         <button>Download</button>
-                      </a>
+                      </a> */}
+                      <button type="button" onClick={handleDownload}>Download</button>
                     </div>
                   </div>
                   </div>
@@ -69,15 +118,28 @@ function ImageModal({close,imgData}) {
               </div>
               <div className='description-profile--social'>
               {twitter_username ? <p> <FiTwitter/> / <span>{twitter_username}</span> </p> : instagram_username?  <p> <AiOutlineInstagram/> / <span>{instagram_username}</span></p> : null}
-              {location && <p><GoLocation/> / <span>{location}</span></p>}
+              {/* {location && <p><GoLocation/> / <span>{location}</span></p>} */}
               </div>
            </div>
 
-           <div className='description-likes'>
-              <AiFillLike fontSize={30}/>
+           <div className='description-counts'>
+              <div>
+              <AiFillLike fontSize={20}/>
               <div>{likes}</div>
+              </div>
+              <div>
+              <HiDownload fontSize={20}/>
+              <div>{downloads}</div>
+              </div>
            </div>
+
          </div>   
+         <div className='tags'>
+         {tags.map((tag,index)=><li onClick={(e)=>{
+           e.preventDefault()
+           handleTagSearch(tag)
+         }} className='tag' key={index}>{tag}</li>).splice(0,7)}
+         </div>
         </Box>
     
     </Wrapper>
@@ -89,7 +151,7 @@ const Wrapper  = styled.div`
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
     img{
       width:100%;
-      height: 30rem;
+      height: 25rem;
       object-fit: cover;
       border-radius-top-right: 10px;
       border-radius-top-left: 10px;
@@ -203,11 +265,12 @@ const Wrapper  = styled.div`
           }
         }
     }
-    .description-likes{
+    .description-counts{
       display: flex;
       align-items: center;
       margin: 0 1rem;
       div{
+        display:flex;
         margin: 0 .5rem;
         font-size: 1.2rem;
       }
@@ -220,6 +283,23 @@ const Wrapper  = styled.div`
        flex-direction: column;
       align-items:center; 
       text-align:center;
+    }
+  }
+
+  .tags{
+    display: flex;
+    flex-wrap: wrap;
+    margin:.5rem 0;
+    .tag{
+      background:#e2e2e2;
+      padding: .6rem 1rem;
+      border-radius: 5px;
+      margin:.2rem;
+      cursor:pointer;
+      transition:all .3s ease;
+      &:hover{
+        background:#dddcdc;
+      }
     }
   }
 `

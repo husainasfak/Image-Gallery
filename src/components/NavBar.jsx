@@ -10,7 +10,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import DarkModeSwitch from './DarkModeSwitch';
 import { useMediaQuery } from 'react-responsive'
 import {useAppConfigContext} from '../context/appConfigContext';
-import { findAllByTestId } from '@testing-library/react';
+
 
 const NavBar = () => {
   const [openSearch,setOpenSearch] = useState(false)
@@ -70,7 +70,7 @@ const NavBar = () => {
       <FormGroup>
 
       <FormControlLabel
-        control={<DarkModeSwitch onChange={changeTheme()} />}
+        control={<DarkModeSwitch />}
       />
 
       </FormGroup>

@@ -1,4 +1,4 @@
-import {FETCH_IMG_BEGIN,FETCH_IMG_ERROR,CURRENT_PAGE,UPDATE_SEARCH_QUERY, FETCH_IMG_AFTER_SEARCH } from '../action';
+import {FETCH_IMG_BEGIN,FETCH_IMG_ERROR,CURRENT_PAGE,UPDATE_SEARCH_QUERY, FETCH_IMG_AFTER_SEARCH,TAGS } from '../action';
 
 
 const searchImgReducer = (state,action) =>{
@@ -13,6 +13,8 @@ const searchImgReducer = (state,action) =>{
                return {...state,currentPage:action.payload}
           case UPDATE_SEARCH_QUERY:
                return {...state,searchQuery:action.payload}
+          case TAGS:
+               return {...state,tags:action.payload}
           default:
                return state
      }

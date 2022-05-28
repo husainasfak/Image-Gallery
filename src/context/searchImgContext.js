@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useReducer } from 'react'
 import searchImgReducer from '../reducers/searchImgReducer';
-import { FETCH_IMG_AFTER_SEARCH,FETCH_IMG_BEGIN,FETCH_IMG_ERROR,CURRENT_PAGE,UPDATE_SEARCH_QUERY } from '../action';
+import { FETCH_IMG_AFTER_SEARCH,FETCH_IMG_BEGIN,FETCH_IMG_ERROR,CURRENT_PAGE,UPDATE_SEARCH_QUERY,TAGS } from '../action';
 import axios from 'axios';
 const initialState = {
      isLoading:false,
@@ -9,6 +9,7 @@ const initialState = {
      searchQuery:'',
      currentSearchPage:1,
      endPoint:'search/photos',
+     tags:[]
      
 }
 const SearchImgContext = React.createContext();
@@ -33,7 +34,16 @@ export const SearchImgProvider = ({children}) =>{
                params:{query:state.searchQuery,page:state.currentPage},
                cancelToken:cancelReq,
           }).then(response=>{
+               const tags = []
+               response.data.results.map(item=>{
+                    item.tags.map(tag=>{
+                         tags.push(tag.title)
+                    })
+               })
+               
                dispatch({type:FETCH_IMG_AFTER_SEARCH,payload:response.data.results})
+               
+               dispatch({type:TAGS,payload:tags})
                
           }).catch(err=>{
                dispatch({type:FETCH_IMG_ERROR})

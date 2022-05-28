@@ -6,6 +6,7 @@ import ImageModel from './ImageModel'
 import Modal from '@mui/material/Modal';
 const ImageCard = React.forwardRef((props,ref) => {
   const [open, setOpen] = useState(false);
+ 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const {urls, likes, user: {name,social:{instagram_username,twitter_username},profile_image}} = props.img ;
@@ -14,8 +15,8 @@ const ImageCard = React.forwardRef((props,ref) => {
 
 
   return (
-    <Wrapper ref={ref} >
-         <img onClick={handleOpen} width="300px" className='main-img'  src={urls.small} alt={name}/>
+    <Wrapper ref={ref}>
+          <img  onClick={handleOpen} width="300px" className='main-img'  src={urls.small_s3} alt={name}/>
 
          <div className='main-img--description'>
 
@@ -49,6 +50,9 @@ const Wrapper = styled.div`
   border-radius:  .6rem;
   margin: 20px 0;
   box-shadow: 0 0 7px rgba(0,0,0,0.5);
+  .loading-text{
+    margin: 1rem;
+  }
   .main-img{
     width: 100%;
     border-radius: .6rem .6rem 0 0;

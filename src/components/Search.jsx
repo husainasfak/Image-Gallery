@@ -4,8 +4,9 @@ import { FiSearch } from "react-icons/fi";
 import './Search.css';
 import data from '../searchData/autoComplete.json'
 import { useSearchImgContext } from "../context/searchImgContext";
+
 const Search = ({ placeHolder, place}) => {
-  const {updateSeachQuery} = useSearchImgContext();
+  const {updateSeachQuery,searchQuery} = useSearchImgContext();
   const [term,setTerm] = useState('');
   const [searchResult,setSearchResult] = useState([])
 
@@ -19,12 +20,12 @@ const Search = ({ placeHolder, place}) => {
          clearInterval(timeoutId)
     }
 },[term])
-  const handleAutoComplete = () =>{
-    
+  const handleAutoComplete = async() =>{
  let autoCompleteData = data.filter(suggestions=>{
    
    return suggestions.query.toLowerCase().includes(term)
  })
+
   
   if(term === ''){
     setSearchResult([])
@@ -46,7 +47,7 @@ const Search = ({ placeHolder, place}) => {
         className={`search-input`}
         placeholder={placeHolder}
         value={term}
-        name={term}
+        name={searchQuery}
         onChange={(e)=>setTerm(e.target.value)}
       />
     </SearchBar>

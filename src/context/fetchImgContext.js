@@ -30,7 +30,6 @@ export const FetchImgProvider = ({children}) =>{
                params:{query:state.searchQuery,page:state.currentPage},
                cancelToken:cancelReq,
           }).then(response=>{
-               console.log(response)
                dispatch({type:FETCH_IMG,payload:response.data})
                
           }).catch(err=>{
