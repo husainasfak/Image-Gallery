@@ -3,19 +3,27 @@ import styled from 'styled-components'
 import {useAppConfigContext} from '../context/appConfigContext';
 import {MdCancel} from 'react-icons/md'
 import {ReactComponent as Logo} from '../assets/logo.svg';
-
+import {ReactComponent as LogoLight} from '../assets/logo-light.svg';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import DarkModeSwitch from './DarkModeSwitch';
 import { Link } from 'react-router-dom';
 const Sidebar = () => {
 
-const { isSidebarOpen,closeSidebar} = useAppConfigContext();
+const { isSidebarOpen,closeSidebar,changeTheme,theme} = useAppConfigContext();
+const handleThemeChange = () =>{
+  changeTheme(theme === 'light-theme' ? 'dark-theme' : 'light-theme')
+  closeSidebar()
 
+}
 
   return (
     <SidebarContainer>
-           <div className={`${isSidebarOpen?'sidebar show-sidebar':'sidebar'}`}>
+           <div className={`${isSidebarOpen?'sidebar show-sidebar':'sidebar'} ${theme==='dark-theme'?'sidebar-dark':''}`}>
               <div className='sidebar-header'>
               <Link to = '/' className='logo'>
-                <Logo onClick={closeSidebar}/>
+                {theme==='dark-theme'? <LogoLight onClick={closeSidebar}/> : <Logo onClick={closeSidebar}/>}
+
               </Link>
 
              
@@ -24,17 +32,27 @@ const { isSidebarOpen,closeSidebar} = useAppConfigContext();
                   />
                 
               </div>
+              
               <div className="sidebar-links">
-              <Link to='/explore' className='link' onClick={closeSidebar}>
+                <div className='mode'>
+      <FormGroup>
+
+      <FormControlLabel
+        control={<DarkModeSwitch onChange={handleThemeChange} checked={theme === 'dark-theme'}  />}
+      />
+
+      </FormGroup>
+      </div>
+              <Link to='/explore' className={`link ${theme==='dark-theme'?'link-dark':""}`} onClick={closeSidebar}>
           Explore
           
         </Link>
 
-        <Link to='/collection' className='link' onClick={closeSidebar}>
+        <Link to='/collection' className={`link ${theme==='dark-theme'?'link-dark':""}`} onClick={closeSidebar}>
           Collection
         </Link>
 
-        <Link to='/community' className='link' onClick={closeSidebar}>
+        <Link to='/community' className={`link ${theme==='dark-theme'?'link-dark':""}`} onClick={closeSidebar}>
           Community
         </Link>
               </div>
@@ -62,6 +80,9 @@ const SidebarContainer = styled.div`
     transform: translate(45%);
     z-index: 999;
   }
+  .sidebar-dark{
+    background: #000;
+  }
   .sidebar-header{
     display:flex;
     justify-content: space-between;
@@ -82,6 +103,15 @@ const SidebarContainer = styled.div`
         background:#e2e2e2;
       }
     }
+    .link-dark{
+      color:#fff;
+      &:hover{
+        background:#1c1c1c;
+      }
+    }
+  }
+  .mode{
+    padding: .7rem;
   }
 `
 export default Sidebar;

@@ -68,6 +68,7 @@ const Wrapper = styled.section`
      .searchTerm{
           font-size:3rem;
           margin:1rem;
+          text-transform: capitalize;
      }
      .masonry-grid {
           display: flex;

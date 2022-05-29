@@ -8,7 +8,7 @@ const initialState = {
      isLoading:false,
      featuredHeaderImg:{},
      featuredHeaderImgError:false,
-     lightMode:true
+     theme:'light-theme'
 }
 
 const AppConfigContext = React.createContext();
@@ -16,8 +16,8 @@ const AppConfigContext = React.createContext();
 export const AppConfigProvider = ({children}) =>{
      const [state,dispatch] = useReducer(appConfigReducer,initialState);
      
-     const changeTheme = () =>{
-          dispatch({type:CHANGE_THEME})
+     const changeTheme = (theme) =>{
+          dispatch({type:CHANGE_THEME,payload:theme})
      }
 
      const openSidebar = () => {

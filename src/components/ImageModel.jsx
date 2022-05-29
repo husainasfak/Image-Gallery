@@ -10,12 +10,12 @@ import { useMediaQuery } from 'react-responsive'
 import unsplash from '../api/unsplash';
 import {HiDownload} from 'react-icons/hi';
 import { useSearchImgContext } from "../context/searchImgContext";
-
+import {useAppConfigContext} from '../context/appConfigContext';
 function ImageModal({close,imgData}) {
   const {urls, likes, user: {name,first_name,links:{html} ,social:{instagram_username,twitter_username},profile_image} , links} = imgData;
 
   const {updateSeachQuery} = useSearchImgContext();  
-
+  const{theme} = useAppConfigContext()
   const [tags,setTags] = React.useState([]);
 
   const [downloads,setDownloads] = React.useState(0);
@@ -30,7 +30,7 @@ function ImageModal({close,imgData}) {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: isDesktopOrLaptop ? 400 : 700,
-    bgcolor: 'background.paper',
+    bgcolor: theme==='dark-theme'?'#131313':'#ecf0f1',
     boxShadow: 24,
     borderRadius:3
   };
@@ -106,7 +106,7 @@ function ImageModal({close,imgData}) {
                   </div>
                   </div>
               </div>  
-              <div className={`main-img--description ${isDesktopOrLaptop ? 'main-img--description-small':''}`}>
+              <div className={`main-img--description ${isDesktopOrLaptop ? 'main-img--description-small':''} ${theme==='dark-theme'?'main-img--description-dark':''} `}>
 
            <div className='description-profile'>
               <div  className='description-profile--img'>
@@ -210,7 +210,7 @@ const Wrapper  = styled.div`
         border-radius:5px;
         border:none;
         outline:none;
-        background-color: #fbfbfb;
+        background-color: #eaeaea;
         cursor: pointer;
         h5{
           margin:0 .3rem;
@@ -286,22 +286,44 @@ const Wrapper  = styled.div`
     }
   }
 
+
   .tags{
     display: flex;
     flex-wrap: wrap;
     margin:.5rem 0;
     .tag{
-      background:#e2e2e2;
+      background:#c8c8c8;
       padding: .6rem 1rem;
       border-radius: 5px;
       margin:.2rem;
       cursor:pointer;
       transition:all .3s ease;
       &:hover{
-        background:#dddcdc;
+        background:#cfcfcf;
       }
     }
   }
+
+
+  .main-img--description-dark{
+    .description-profile{
+        .description-profile--text{
+          h3,p{
+            color: #fff;
+          }
+        }
+        
+        
+    }
+    .description-counts{
+      div{
+        color: #fff;
+      }
+    }
+    
+    }
+  
+  
 `
 
 export default ImageModal;

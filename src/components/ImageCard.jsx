@@ -4,11 +4,14 @@ import {AiFillLike} from 'react-icons/ai';
 
 import ImageModel from './ImageModel'
 import Modal from '@mui/material/Modal';
+import {useAppConfigContext} from '../context/appConfigContext';
+
 const ImageCard = React.forwardRef((props,ref) => {
   const [open, setOpen] = useState(false);
  
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const{theme} = useAppConfigContext()
   const {urls, likes, user: {name,social:{instagram_username,twitter_username},profile_image}} = props.img ;
 
   
@@ -16,7 +19,8 @@ const ImageCard = React.forwardRef((props,ref) => {
 
   return (
     <Wrapper ref={ref}>
-          <img  onClick={handleOpen} width="300px" className='main-img'  src={urls.small_s3} alt={name}/>
+          <div className={`card ${theme==='dark-theme'?'card-dark':''}`}>
+            <img  onClick={handleOpen} width="300px" className='main-img'  src={urls.small_s3} alt={name}/>
 
          <div className='main-img--description'>
 
@@ -42,15 +46,18 @@ const ImageCard = React.forwardRef((props,ref) => {
         aria-describedby="modal-modal-description">
             <ImageModel close={handleClose} imgData={props.img} />
         </Modal>
+          </div>
     </Wrapper>
   )
 })
 const Wrapper = styled.div`
-  background-color: #ecf0f1;
-  border-radius:  .6rem;
-  margin: 20px 0;
-  box-shadow: 0 0 7px rgba(0,0,0,0.5);
-  .loading-text{
+ 
+  .card{
+    background-color: #ecf0f1;
+    border-radius:  .6rem;
+    margin: 20px 0;
+    box-shadow: 0 0 7px rgba(0,0,0,0.5);
+    .loading-text{
     margin: 1rem;
   }
   .main-img{
@@ -59,6 +66,7 @@ const Wrapper = styled.div`
     cursor: pointer;
   }
   .main-img--description{
+   
     padding: .7rem 0;
     display: flex;
     justify-content: space-between;
@@ -90,6 +98,30 @@ const Wrapper = styled.div`
     }
    
   }
+  }
+  .card-dark{
+    background-color: #131313;
+    .main-img--description{
+
+   .description-profile{
+     
+       &--text{
+         h3,p{
+           color:#ecf0f1;
+         }
+       }
+   }
+   .description-likes{
+     color:#ecf0f1;
+     div{
+       margin: 0 .5rem;
+       font-size: 1.2rem;
+     }
+   }
+  }
+ 
+  
+}
 
  
 `

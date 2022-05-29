@@ -8,9 +8,26 @@ body,body::after,body::before {
   font-size: 1rem;
 }
 
+.dark-theme{
+  background-color: #2f3640;
+  z-index:0;
+  transition: all .5s ease;
+
+}
+.dark-theme h1,h2,h3,h4,h5,ol,ul,li,a{
+  color:#fff;
+}
+
+.light-theme{
+  background-color: #fff;
+  transition: all .5s ease;
+
+}
+.light-theme h1,h2,h3,h4,h5,ol,ul,li,a{
+  color:#000;
+}
 a{
   text-decoration: none;
-  color: #000;
 }
 li,ol{
   list-style: none;

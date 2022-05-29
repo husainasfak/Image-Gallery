@@ -14,7 +14,7 @@ const appConfigReducer = (state,action) =>{
           case FETCH_HEADER_IMG_ERROR:
                return{...state,featuredHeaderImgError:true,isLoading:false}
           case CHANGE_THEME:
-               return {...state,lightMode:!state.lightMode}
+               return {...state,theme:action.payload}
           default:
                return state
      }

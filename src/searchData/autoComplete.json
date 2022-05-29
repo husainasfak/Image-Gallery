@@ -1,45 +1,180 @@
-
 [
-                    {
-                    "query": "astronaut",
-                    "keywords": ["moon","space","astronaut suit"]
-                    },
-                    {
-                    "query": "animal",
-                    "keywords": ["elephant","tiger","lion","deer","mammals"]
-                    },
-                    {
-                    "query": "abstract",
-                    "priority": ["abstract art","abstract background","abstract dark"]
-                    },
-                    
-                    {
-                    "query": "Animal in the zoo",
-                    "keywords": ["elephant","tiger","lion","deer","mammals"]
-                    },
-                    {
-                         "query": "birthday",
-                         "keywords": ["happy birthday","birthday cake","cake","celebration"]
-                    },
-                    {
-                         "query":"books",
-                         "keywords":["romentice books","fiction books","self help books"]
-                    },
-                    {
-                         "query": "construction",
-                         "keywords": ["buildings construction"]
-                    },
-                    {
-                         "query": "cars",
-                         "keywords": ["audi", "bmw","racing cars"]
-                    },
-                    {
-                         "query": "fitness",
-                         "keywords": ["yoga", "excercise"]
-                    },
-                    {
-                         "query": "fitness",
-                         "keywords": ["yoga", "excercise"]
-                    }
-        
+  {
+    "query": "astronaut"
+  },
+  {
+    "query": "animal"
+  },
+  {
+    "query": "abstract"
+  },
+
+  {
+    "query": "Animal in the zoo"
+  },
+  {
+    "query": "Animal portraits"
+  },
+  {
+    "query": "birthday"
+  },
+  {
+    "query": "baby"
+  },
+  {
+    "query": "books"
+  },
+  {
+    "query": "bbq"
+  },
+  {
+    "query": "birds"
+  },
+  {
+    "query": "construction"
+  },
+  {
+    "query": "cars"
+  },
+  {
+    "query": "concert"
+  },
+  {
+    "query": "camera"
+  },
+  {
+    "query": "3d wallpaper"
+  },
+  {
+    "query": "3d printing"
+  },
+  {
+    "query": "earth"
+  },
+  {
+    "query": "education"
+  },
+  {
+    "query": "e commerce"
+  },
+  {
+    "query": "fitness"
+  },
+  {
+    "query": "food"
+  },
+  {
+    "query": "gaming"
+  },
+  {
+    "query": "great ideas"
+  },
+  {
+    "query": "human"
+  },
+  {
+    "query": "health"
+  },
+  {
+    "query": "home"
+  },
+  {
+    "query": "interior"
+  },
+  {
+    "query": "jewelry"
+  },
+  {
+    "query": "jungle"
+  },
+  {
+    "query": "kids"
+  },
+  {
+    "query": "4k landscape"
+  },
+  {
+    "query": "landscape"
+  },
+  {
+    "query": "couple in love"
+  },
+  {
+    "query": "living room"
+  },
+  {
+    "query": "money"
+  },
+  {
+    "query": "mother"
+  },
+  {
+    "query": "network"
+  },
+  {
+    "query": "nachos"
+  },
+  {
+    "query": "office background"
+  },
+  {
+    "query": "plant"
+  },
+  {
+    "query": "pacific"
+  },
+  {
+    "query": "question"
+  },
+  {
+    "query": "road"
+  },
+  {
+    "query": "room"
+  },
+  {
+    "query": "spring"
+  },
+  {
+    "query": "self help books"
+  },
+  {
+    "query": "sunset"
+  },
+  {
+    "query": "tree"
+  },
+  {
+    "query": "underwater"
+  },
+  {
+    "query": "vegetables"
+  },
+  {
+    "query": "virtual reality"
+  },
+  {
+    "query": "water"
+  },
+  {
+    "query": "aesthetic wallpaper"
+  },
+  {
+    "query": "wedding"
+  },
+  {
+    "query": "xbox"
+  },
+  {
+    "query": "yoga"
+  },
+  {
+    "query": "thank you"
+  },
+  {
+    "query": "zoom background"
+  },
+  {
+    "query": "gen z"
+  }
 ]

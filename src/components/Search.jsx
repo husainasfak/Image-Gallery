@@ -41,13 +41,13 @@ const Search = ({ placeHolder, place}) => {
   return (
     <Wrapper>
       <SearchBar className={`${place=='nav'?'search-nav':'search-header'}`}>
-      <FiSearch className="search-icon" />
+      <FiSearch className="search-icon" color="#000" />
       <input
         type="search"
         className={`search-input`}
         placeholder={placeHolder}
         value={term}
-        name={searchQuery}
+        name={term}
         onChange={(e)=>setTerm(e.target.value)}
       />
     </SearchBar>
